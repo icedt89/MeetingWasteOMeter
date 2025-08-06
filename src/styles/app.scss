@@ -1,0 +1,13 @@
+a {
+  &:link,
+  &:visited,
+  &:hover,
+  &:active {
+    color: #90caf9;
+    text-decoration: none;
+  }
+
+  &:hover {
+    color: #42a5f5;
+  }
+}
