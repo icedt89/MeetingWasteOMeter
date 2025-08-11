@@ -33,11 +33,15 @@ export const useMeetingStore = defineStore(
       computeWastedMoney(elapsedSeconds.value, validResources.value)
     )
 
-    function addResource(name: string) {
+    function addNewResource(
+      name: string,
+      memberCount: number,
+      costPerHour: number
+    ) {
       resources.value.push({
         name: name,
-        memberCount: 1,
-        costPerHour: 0,
+        memberCount: memberCount,
+        costPerHour: costPerHour,
       })
     }
 
@@ -96,7 +100,7 @@ export const useMeetingStore = defineStore(
       isActive,
       wastedMoney,
       hasValidResources,
-      addResource,
+      addNewResource,
       removeResource,
       toggleActivity,
       resetElapsedSeconds,

@@ -10,21 +10,24 @@ export function computeWastedMoney(
     return 0
   }
 
-  const totalCostPerSecond = computeTotalCostPerSecond(resources)
-
-  return elapsedSeconds * totalCostPerSecond
+  return resources
+    .map((r) => computeTotalResourceCost(r, elapsedSeconds))
+    .reduce((p, c) => p + c)
 }
 
-function computeTotalCostPerSecond(resources: Resource[]) {
-  return resources.map((r) => computeCostPerSecond(r)).reduce((p, c) => p + c)
+export function computeTotalResourceCost(
+  resource: Resource,
+  elapsedSeconds: number
+) {
+  return computeCostPerSecond(resource) * elapsedSeconds
 }
 
 function computeCostPerSecond(resource: Resource) {
-  const totalResourceCost = computeTotalCost(resource)
+  const totalResourceCost = computeTotalCostPerHour(resource)
 
   return totalResourceCost / oneHourInSeconds
 }
 
-function computeTotalCost(resource: Resource) {
+function computeTotalCostPerHour(resource: Resource) {
   return resource.memberCount * resource.costPerHour
 }

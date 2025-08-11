@@ -1,5 +1,8 @@
 import { describe, expect, test } from 'vitest'
-import { computeWastedMoney } from '@/helper/waste-helper'
+import {
+  computeWastedMoney,
+  computeTotalResourceCost,
+} from '@/helper/waste-helper'
 import { type Resource } from '@/types/resource'
 
 describe('computeWastedMoney', () => {
@@ -49,5 +52,39 @@ describe('computeWastedMoney', () => {
 
     // Assert
     expect(wastedMoney).toBe(50)
+  })
+})
+
+describe('computeTotalResourceCost', () => {
+  test('Returns 0 if elapsedSeconds is 0', () => {
+    // Arrange
+    const elapsedSeconds = 0
+    const resource: Resource = {
+      name: 'name',
+      memberCount: 1,
+      costPerHour: 1,
+    }
+
+    // Act
+    const totalResourceCost = computeTotalResourceCost(resource, elapsedSeconds)
+
+    // Assert
+    expect(totalResourceCost).toBe(0)
+  })
+
+  test('Computes the total resource cost correctly', () => {
+    // Arrange
+    const elapsedSeconds = 3600
+    const resource: Resource = {
+      costPerHour: 50,
+      memberCount: 1,
+      name: 'name',
+    }
+
+    // Act
+    const totalResourceCost = computeTotalResourceCost(resource, elapsedSeconds)
+
+    // Assert
+    expect(totalResourceCost).toBe(50)
   })
 })

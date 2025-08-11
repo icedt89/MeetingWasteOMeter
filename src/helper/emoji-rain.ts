@@ -1,9 +1,9 @@
-import { onUnmounted, ref } from 'vue'
+import { onUnmounted, ref, isRef, type Ref } from 'vue'
 import { useIntervalFn } from '@vueuse/core'
 
 export interface EmojiRainOptions {
-  flakes?: string[]
-  spawnInterval?: number // ms between new flakes
+  emojis?: string[] | Ref<string[]>
+  spawnInterval?: number // ms between new emojis
   minSize?: string // CSS size, e.g. '1rem'
   maxSize?: string // CSS size, e.g. '2.5rem'
   fallDuration?: number // ms to fall from top → bottom
@@ -15,8 +15,21 @@ export interface EmojiRainOptions {
   wobbleEasing?: string // any valid CSS easing function
 }
 
+export const defaultEmojis = [
+  '🤑',
+  '👋',
+  '🚬',
+  '🚽',
+  '⏳',
+  '💰',
+  '💲',
+  '💵',
+  '💸',
+  '💩',
+]
+
 export function useEmojiRain({
-  flakes = ['🤑', '👋', '🚬', '🚽', '⏳', '💰', '💲', '💵', '💸', '💩'],
+  emojis: rawEmojis = defaultEmojis,
   spawnInterval = 200,
   minSize = '1rem',
   maxSize = '4rem',
@@ -29,6 +42,9 @@ export function useEmojiRain({
   wobbleEasing = 'ease-in-out',
 }: EmojiRainOptions = {}) {
   const cssInjected = ref(false)
+  const emojis: Ref<string[]> = isRef(rawEmojis)
+    ? rawEmojis
+    : ref<string[]>([...rawEmojis])
 
   function randomBetween(min: number, max: number) {
     return Math.random() * (max - min) + min
@@ -41,7 +57,7 @@ export function useEmojiRain({
 
     const style = document.createElement('style')
     style.textContent = `
-      .snowflake {
+      .emoji {
         position: fixed;
         top: -2rem;
         pointer-events: none;
@@ -66,9 +82,15 @@ export function useEmojiRain({
   }
 
   function spawnEmoji() {
-    const char = flakes[Math.floor(Math.random() * flakes.length)]
+    const choices = emojis.value
+    const char = choices[Math.floor(Math.random() * choices.length)]
+
+    if (!char) {
+      return
+    }
+
     const span = document.createElement('span')
-    span.className = 'snowflake'
+    span.className = 'emoji'
     span.textContent = char
 
     // 1) horizontal start
@@ -134,5 +156,6 @@ export function useEmojiRain({
     start,
     stop,
     isActive,
+    emojis,
   }
 }

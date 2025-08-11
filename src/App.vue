@@ -15,10 +15,6 @@
           </v-icon>
         </v-avatar>
         Meeting Waste-o-Meter
-        <span class="text-disabled font-italic text-caption opacity-50"
-          >by
-          <a href="https://jan-hafner.de" target="_blank">Jan Hafner</a></span
-        >
       </v-app-bar-title>
       <template #append>
         <v-menu>
@@ -63,7 +59,7 @@
     </v-app-bar>
 
     <v-main>
-      <v-container class="ma-0 pt-10" fluid>
+      <v-container class="ma-0" :class="{ 'pt-10': !xs }" fluid>
         <v-row dense no-gutters justify="center" align="center">
           <v-col cols="auto">
             <meeting-name-display />
@@ -81,25 +77,36 @@
         </v-row>
         <v-row dense no-gutters justify="center" align="center">
           <v-col>
-            <v-divider class="mb-5 mt-10" />
+            <v-divider
+              :class="{
+                'mt-10': !xs,
+                'mb-7': !xs,
+                'mt-5': xs,
+                'mb-3': xs,
+              }"
+            />
+          </v-col>
+        </v-row>
+        <v-row
+          v-if="hasValidResources"
+          dense
+          no-gutters
+          justify="center"
+          align="center"
+        >
+          <v-col cols="auto">
+            <div class="d-flex justify-center text-h5">Totally wasted</div>
+            <wasted-money />
           </v-col>
         </v-row>
         <v-row dense no-gutters justify="center" align="center">
-          <v-col cols="auto">
-            <wasted-money v-if="hasValidResources" />
-            <v-alert
-              v-else
-              border="start"
-              closable
-              variant="plain"
-              density="compact"
-              >Please add valid resources to compute the wasted money.</v-alert
-            >
-          </v-col>
-        </v-row>
-        <v-row dense no-gutters justify="center" align="center">
-          <v-col cols="auto">
-            <resource-editor class="mt-5" />
+          <v-col
+            :class="{
+              'mt-10': hasValidResources && !xs,
+              'mt-5': hasValidResources && xs,
+            }"
+          >
+            <resource-editor />
           </v-col>
         </v-row>
       </v-container>
@@ -119,7 +126,7 @@ import AboutDialog from '@/components/AboutDialog.vue'
 import TimerDisplay from '@/components/TimerDisplay.vue'
 import TimerControls from '@/components/TimerControls.vue'
 import { useEmojiRain } from '@/helper/emoji-rain'
-import { watch } from 'vue'
+import { computed, watch } from 'vue'
 import { useMeetingStore } from '@/stores/meeting-store'
 import { storeToRefs } from 'pinia'
 import ResourceEditor from '@/components/ResourceEditor.vue'
@@ -129,12 +136,26 @@ import SettingsDialog from '@/components/SettingsDialog.vue'
 import { useSettingsStore } from '@/stores/settings-store'
 import SetElapsedTimeDialog from '@/components/SetElapsedTimeDialog.vue'
 import ResetAppStateDialog from '@/components/ResetAppStateDialog.vue'
+import { useDisplay } from 'vuetify'
 
-const { isFunnyWastingAnimationEnabled } = storeToRefs(useSettingsStore())
+const { xs } = useDisplay()
 
 const { isActive, hasValidResources } = storeToRefs(useMeetingStore())
 
-const { start: startEmojiRain, stop: stopEmojiRain } = useEmojiRain()
+const { isFunnyWastingAnimationEnabled, emojis } =
+  storeToRefs(useSettingsStore())
+
+const emojisArray = computed(() => {
+  if (!emojis.value) {
+    return []
+  }
+
+  return Array.from(emojis.value)
+})
+
+const { start: startEmojiRain, stop: stopEmojiRain } = useEmojiRain({
+  emojis: emojisArray,
+})
 
 watch([isActive, isFunnyWastingAnimationEnabled], ([a, b]) => {
   if (a && b) {
