@@ -11,8 +11,13 @@
           <v-expansion-panels v-model="expanded" multiple>
             <release-notes-item
               is-current
+              version="v0.2.1"
+              :new-features="['Minor UI changes']"
+              :miscellaneous="[defaultDependenciesUpdatedMessage]"
+            />
+            <release-notes-item
               version="v0.2.0"
-              :miscellaneous="[
+              :new-features="[
                 'Made emojis configurable',
                 'Layout improvements for mobile devices',
               ]"

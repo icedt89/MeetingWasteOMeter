@@ -14,7 +14,7 @@
     <v-expansion-panel-text>
       <template v-if="newFeatures && newFeatures.length">
         <h5>New</h5>
-        <ul class="text-subtitle-2">
+        <ul>
           <li v-for="(item, index) in newFeatures" :key="index" class="ml-4">
             {{ item }}
           </li>
@@ -22,7 +22,7 @@
       </template>
       <template v-if="bugfixes && bugfixes.length">
         <h5>Fixes</h5>
-        <ul class="text-subtitle-2">
+        <ul>
           <li v-for="(item, index) in bugfixes" :key="index" class="ml-4">
             {{ item }}
           </li>
@@ -30,7 +30,7 @@
       </template>
       <template v-if="miscellaneous && miscellaneous.length">
         <h5>Miscellaneous</h5>
-        <ul class="text-subtitle-2">
+        <ul>
           <li v-for="(item, index) in miscellaneous" :key="index" class="ml-4">
             {{ item }}
           </li>

@@ -40,7 +40,7 @@
               <v-list-item
                 value="3"
                 :prepend-icon="mdiDeleteOutline"
-                title="Reset App State"
+                title="Reset App"
               >
                 <reset-app-state-dialog activator="parent" />
               </v-list-item>
@@ -48,7 +48,7 @@
               <v-list-item
                 value="4"
                 :prepend-icon="mdiInformationOutline"
-                title="About Meeting Waste-o-Meter"
+                title="About"
               >
                 <about-dialog activator="parent" />
               </v-list-item>
