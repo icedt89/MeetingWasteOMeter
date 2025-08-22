@@ -5,27 +5,22 @@
         <v-card-text class="pb-0">
           <div class="mb-3">This will reset the App to their defaults.</div>
 
-          <v-checkbox
-            label="Current meeting"
-            v-model="shouldResetMeetingStore"
-            color="primary"
-            density="compact"
-            hide-details
-          />
-          <v-checkbox
-            label="Settings"
-            v-model="shouldResetSettingsStore"
-            color="primary"
-            density="compact"
-            hide-details
-          />
+          <v-row>
+            <v-col>
+              <v-checkbox
+                label="Current meeting"
+                v-model="shouldResetMeetingStore"
+              />
+            </v-col>
+            <v-col>
+              <v-checkbox label="Settings" v-model="shouldResetSettingsStore" />
+            </v-col>
+          </v-row>
         </v-card-text>
         <v-card-actions>
-          <v-btn
+          <close-dialog-button
             text="Reset"
             :disabled="!shouldResetAny"
-            variant="tonal"
-            rounded="xs"
             @click="resetAppState(isActive)"
           />
         </v-card-actions>

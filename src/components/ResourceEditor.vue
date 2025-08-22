@@ -1,5 +1,5 @@
 <template>
-  <v-expansion-panels v-if="resources.length" v-model="expanded" multiple>
+  <v-expansion-panels v-if="resources.length" v-model="expanded">
     <resource-input
       v-for="(resource, index) in resources"
       :key="index"
@@ -16,11 +16,10 @@
   >
   <v-btn
     block
-    class="mt-5"
-    rounded="xs"
-    color="info"
+    class="mt-2"
+    :color="resources.length ? 'undefined' : 'primary'"
     size="large"
-    variant="tonal"
+    :variant="resources.length ? 'tonal' : 'elevated'"
     text="Add resource"
     @click="addNewResource()"
   />

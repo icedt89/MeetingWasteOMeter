@@ -1,6 +1,6 @@
 import { defaultEmojis } from '@/helper/emoji-rain'
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 
 const defaultCurrencySymbol = ' €'
 
@@ -9,7 +9,9 @@ export const useSettingsStore = defineStore(
   () => {
     const isFunnyWastingAnimationEnabled = ref(true)
     const currencySymbol = ref(defaultCurrencySymbol)
+
     const emojis = ref(defaultEmojis.join(''))
+    const emojisArray = computed(() => Array.from(emojis.value || ''))
 
     function reset() {
       isFunnyWastingAnimationEnabled.value = true
@@ -21,6 +23,7 @@ export const useSettingsStore = defineStore(
       isFunnyWastingAnimationEnabled,
       currencySymbol,
       emojis,
+      emojisArray,
       reset,
     }
   },

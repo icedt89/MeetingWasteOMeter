@@ -1,19 +1,20 @@
 <template>
-  <v-btn
-    :active="isActive"
-    stacked
-    density="compact"
-    class="rounded-te-0 rounded-be-0"
+  <timer-controls-button
+    :active="isIntervalActive"
+    :class="{
+      'rounded-te-0 rounded-be-0': isResettable,
+    }"
+    rounded
     :text="actionText"
-    :size="xs ? 'small' : undefined"
+    :size="xs ? 'small' : undefined!"
     @click="toggleActivity()"
   />
-  <v-btn
-    stacked
-    density="compact"
+  <timer-controls-button
+    v-if="isResettable"
     class="rounded-ts-0 rounded-bs-0"
     text="Reset"
-    :size="xs ? 'small' : undefined"
+    rounded
+    :size="xs ? 'small' : undefined!"
     @click="resetElapsedSeconds()"
   />
 </template>
@@ -27,10 +28,12 @@ import { useDisplay } from 'vuetify'
 const { xs } = useDisplay()
 
 const meetingStore = useMeetingStore()
-const { isActive } = storeToRefs(meetingStore)
+const { isIntervalActive, elapsedSeconds } = storeToRefs(meetingStore)
 const { resetElapsedSeconds, toggleActivity } = meetingStore
 
+const isResettable = computed(() => elapsedSeconds.value > 0)
+
 const actionText = computed(() =>
-  !isActive.value ? 'Waste everyone`s time' : 'Stop wasting time'
+  !isIntervalActive.value ? 'Waste everyone`s time' : 'Stop wasting time'
 )
 </script>

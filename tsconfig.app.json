@@ -1,6 +1,6 @@
 {
   "extends": "@vue/tsconfig/tsconfig.dom.json",
-  "include": ["env.d.ts", "src/**/*"],
+  "include": ["env.d.ts", "src/**/*", "virtual-components.d.ts"],
   "exclude": [
     "node_modules",
     "dist",

@@ -1,12 +1,10 @@
 <template>
-  <v-dialog max-width="400">
+  <v-dialog max-width="500">
     <template #default="{ isActive }">
       <v-card title="Rename meeting">
         <v-card-text class="pb-0">
           <v-text-field
             v-model="name"
-            density="comfortable"
-            variant="solo-filled"
             :rules="[
               (v: string | number | null | undefined) =>
                 isSet(v) || 'Please enter a name for the meeting',
@@ -16,12 +14,7 @@
           />
         </v-card-text>
         <v-card-actions>
-          <v-btn
-            text="Close"
-            variant="tonal"
-            rounded="xs"
-            @click="isActive.value = false"
-          />
+          <close-dialog-button @click="isActive.value = false" />
         </v-card-actions>
       </v-card>
     </template>

@@ -1,5 +1,5 @@
 <template>
-  <v-tooltip text="Rename meeting" open-delay="500">
+  <v-tooltip text="Rename meeting">
     <template #activator="{ props }">
       <v-btn
         v-bind="props"
@@ -10,8 +10,7 @@
           'opacity-50': isNameSet,
         }"
         size="x-small"
-        :color="isNameSet ? 'default' : 'error'"
-        slim
+        :color="isNameSet ? 'undefined' : 'error'"
         density="comfortable"
       />
       <rename-meeting-dialog activator="#rename-meeting-dialog-activator" />

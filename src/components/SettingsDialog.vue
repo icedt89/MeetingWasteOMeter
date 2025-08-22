@@ -6,32 +6,39 @@
           <v-text-field
             label="Currency symbol"
             v-model="currencySymbol"
-            variant="solo"
             hint="Tip: put a space before the symbol"
           />
-          <v-switch
-            label="Emoji rain"
-            v-model="isFunnyWastingAnimationEnabled"
-            color="primary"
-            density="compact"
-            class="ml-1"
-            hide-details
-          />
-          <v-text-field
-            label="Emojis"
-            v-model="emojisProxy"
-            variant="solo"
-            hint="Each character is used as emoji"
-            :messages="!emojisProxy.length ? 'No emojis to rain' : undefined"
-          />
+
+          <v-card :disabled="isEmojiRainActive">
+            <v-card-title class="pb-0">
+              <v-switch
+                label="Emoji rain"
+                v-model="isFunnyWastingAnimationEnabled"
+                class="text-body-1 font-weight-light"
+              >
+                <template #append v-if="isFunnyWastingAnimationEnabled">
+                  <v-btn
+                    :text="`Run 3 seconds test`"
+                    size="x-small"
+                    variant="tonal"
+                    color="undefined"
+                    @click="testEmojiRain()"
+                  />
+                </template>
+              </v-switch>
+            </v-card-title>
+            <v-card-text class="pb-1">
+              <v-text-field
+                label="Emojis"
+                v-model="emojisProxy"
+                hint="Each character is used as emoji"
+                :messages="!emojisProxy.length ? 'No emojis to rain' : []"
+              />
+            </v-card-text>
+          </v-card>
         </v-card-text>
         <v-card-actions>
-          <v-btn
-            text="Close"
-            variant="tonal"
-            rounded="xs"
-            @click="isActive.value = false"
-          />
+          <close-dialog-button @click="isActive.value = false" />
         </v-card-actions>
       </v-card>
     </template>
@@ -42,8 +49,10 @@
 import { useSettingsStore } from '@/stores/settings-store'
 import { storeToRefs } from 'pinia'
 import { computed } from 'vue'
+import { useEmojiRain } from '@/helper/emoji-rain'
+import { useTimeoutFn } from '@vueuse/core'
 
-const { isFunnyWastingAnimationEnabled, currencySymbol, emojis } =
+const { isFunnyWastingAnimationEnabled, currencySymbol, emojis, emojisArray } =
   storeToRefs(useSettingsStore())
 
 const emojisProxy = computed({
@@ -65,5 +74,26 @@ const emojisProxy = computed({
 
 function removeAllSpaces(input: string): string {
   return input.replace(/\s+/g, '')
+}
+
+const {
+  start: startEmojiRain,
+  stop: stopEmojiRain,
+  isActive: isEmojiRainActive,
+} = useEmojiRain({
+  emojis: emojisArray,
+})
+
+const { start: startTestEmojiRain } = useTimeoutFn(() => {
+  stopEmojiRain()
+}, 3_000)
+
+function testEmojiRain() {
+  if (isEmojiRainActive.value) {
+    return
+  }
+
+  startEmojiRain()
+  startTestEmojiRain()
 }
 </script>

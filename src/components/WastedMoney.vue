@@ -1,7 +1,7 @@
 <template>
   <div
-    class="d-flex justify-center text-h1 font-weight-bold mt-0 pt-0"
-    :class="{ 'text-h2': xs }"
+    class="d-flex justify-center font-weight-bold mt-0 pt-0"
+    :class="{ 'text-h1': !xs, 'text-h2': xs }"
   >
     {{ wastedMoneyFormatted }}{{ currencySymbol }}
   </div>

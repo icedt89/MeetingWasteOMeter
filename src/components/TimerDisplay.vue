@@ -1,7 +1,7 @@
 <template>
   <div
-    class="font-weight-bold text-h1"
-    :class="{ pulsate: isPaused, 'text-h2': xs }"
+    class="font-weight-bold"
+    :class="{ pulsate: isPaused, 'text-h1': !xs, 'text-h2': xs }"
   >
     {{ formattedDuration }}
   </div>
@@ -18,7 +18,7 @@
   }
 
   50% {
-    opacity: 0.5;
+    opacity: 0.4;
   }
 
   100% {
@@ -29,22 +29,22 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { format, addSeconds } from 'date-fns'
-import { utc } from '@date-fns/utc'
 import { useMeetingStore } from '@/stores/meeting-store'
 import { storeToRefs } from 'pinia'
 import { useDisplay } from 'vuetify'
+import { formatTimerDisplay, getTimerDisplayParts } from '@/helper/timer-helper'
 
 const { isPaused, elapsedSeconds } = storeToRefs(useMeetingStore())
 
 const { xs } = useDisplay()
 
-const zeroDate = utc(0)
 const formattedDuration = computed<string>(() => {
-  if (!elapsedSeconds.value) {
-    return '00:00:00'
-  }
+  const {
+    hours: hoursPart,
+    minutes: minutesPart,
+    seconds: secondsPart,
+  } = getTimerDisplayParts(elapsedSeconds.value)
 
-  return format(addSeconds(zeroDate, elapsedSeconds.value), 'HH:mm:ss')
+  return formatTimerDisplay(hoursPart, minutesPart, secondsPart)
 })
 </script>

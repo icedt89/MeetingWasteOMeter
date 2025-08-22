@@ -21,6 +21,7 @@ export const useMeetingStore = defineStore(
     } = useIntervalFn(() => elapsedSeconds.value++, 1_000, {
       immediate: false,
     })
+    const isIntervalActive = computed(() => isActive.value)
 
     const isPaused = computed(() => !!elapsedSeconds.value && !isActive.value)
     const validResources = computed(() =>
@@ -97,7 +98,7 @@ export const useMeetingStore = defineStore(
       elapsedSeconds,
       resources,
       isPaused,
-      isActive,
+      isIntervalActive,
       wastedMoney,
       hasValidResources,
       addNewResource,

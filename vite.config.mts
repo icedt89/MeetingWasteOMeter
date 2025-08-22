@@ -1,9 +1,9 @@
 // Plugins
-import Components from 'unplugin-vue-components/vite'
-import Vue from '@vitejs/plugin-vue'
-import Vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
-import { VitePWA } from 'vite-plugin-pwa'
-import ViteFonts from 'unplugin-fonts/vite'
+import components from 'unplugin-vue-components/vite'
+import vue from '@vitejs/plugin-vue'
+import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
+import { VitePWA as vitePWA } from 'vite-plugin-pwa'
+import viteFonts from 'unplugin-fonts/vite'
 
 // Utilities
 import { defineConfig } from 'vite'
@@ -14,68 +14,78 @@ export const alias = {
 }
 
 // https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [
-    Vue({
-      template: { transformAssetUrls },
-    }),
-    VitePWA({
-      registerType: 'autoUpdate',
-      devOptions: { enabled: true },
-      manifest: {
-        name: 'Meeting Waste-o-Meter',
-        display: 'standalone',
-        lang: 'de',
-        icons: [
-          {
-            src: 'pwa-64x64.png',
-            sizes: '64x64',
-            type: 'image/png',
-          },
-          {
-            src: 'pwa-192x192.png',
-            sizes: '192x192',
-            type: 'image/png',
-          },
-          {
-            src: 'pwa-512x512.png',
-            sizes: '512x512',
-            type: 'image/png',
-            purpose: 'any',
-          },
-          {
-            src: 'maskable-icon-512x512.png',
-            sizes: '512x512',
-            type: 'image/png',
-            purpose: 'maskable',
-          },
-        ],
-      },
-    }),
-    Vuetify({
-      autoImport: true,
-      styles: {
-        configFile: 'src/styles/app.scss',
-      },
-    }),
-    Components(),
-    ViteFonts({
-      google: {
-        families: [
-          {
-            name: 'Roboto',
-            styles: 'wght@100;300;400;500;700;900',
-          },
-        ],
-      },
-    }),
-  ],
-  define: { 'process.env': {} },
-  resolve: {
-    alias,
-    extensions: ['.ts', '.vue'],
-  },
-  server: {
-    port: 3002,
-  },
+export default defineConfig(({ mode }) => {
+  const isProduction = mode === 'production'
+
+  return {
+    plugins: [
+      vue({
+        template: { transformAssetUrls },
+      }),
+      vitePWA({
+        registerType: 'autoUpdate',
+        devOptions: { enabled: !isProduction },
+        manifest: {
+          name: 'Meeting Waste-o-Meter',
+          display: 'standalone',
+          theme_color: '#141b22',
+          background_color: '#141b22',
+          lang: 'en',
+          icons: [
+            {
+              src: 'pwa-64x64.png',
+              sizes: '64x64',
+              type: 'image/png',
+            },
+            {
+              src: 'pwa-192x192.png',
+              sizes: '192x192',
+              type: 'image/png',
+            },
+            {
+              src: 'pwa-512x512.png',
+              sizes: '512x512',
+              type: 'image/png',
+              purpose: 'any',
+            },
+            {
+              src: 'maskable-icon-512x512.png',
+              sizes: '512x512',
+              type: 'image/png',
+              purpose: 'maskable',
+            },
+          ],
+        },
+      }),
+      vuetify({
+        autoImport: true,
+        styles: {
+          configFile: 'src/styles/app.scss',
+        },
+      }),
+      components(),
+      viteFonts({
+        google: {
+          families: [
+            {
+              name: 'Roboto',
+              styles: 'wght@100;300;400;500;700;900',
+            },
+          ],
+          preconnect: true,
+        },
+      }),
+    ],
+    resolve: {
+      alias,
+      extensions: ['.ts', '.vue'],
+    },
+    server: {
+      port: 3002,
+    },
+    esbuild: {
+      drop: isProduction ? ['console', 'debugger'] : undefined,
+      legalComments: 'none',
+    },
+  }
 })

@@ -64,6 +64,7 @@ export function useEmojiRain({
         user-select: none;
         will-change: left, top, transform;
         animation-fill-mode: forwards;
+        z-index: 3000;
       }
       @keyframes fall {
         to { top: 100vh; }

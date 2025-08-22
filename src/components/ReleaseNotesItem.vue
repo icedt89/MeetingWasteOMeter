@@ -6,7 +6,7 @@
         v-if="isCurrent"
         text="Current"
         color="success"
-        rounded="xl"
+        rounded
         size="x-small"
         class="ml-2"
       />
