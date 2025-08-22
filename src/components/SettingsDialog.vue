@@ -9,16 +9,15 @@
             hint="Tip: put a space before the symbol"
           />
 
-          <v-card :disabled="isEmojiRainActive">
+          <v-card>
             <v-card-title class="pb-0">
               <v-switch
                 label="Emoji rain"
                 v-model="isFunnyWastingAnimationEnabled"
-                class="text-body-1 font-weight-light"
               >
-                <template #append v-if="isFunnyWastingAnimationEnabled">
+                <template #append>
                   <v-btn
-                    :text="`Run 3 seconds test`"
+                    text="Test"
                     size="x-small"
                     variant="tonal"
                     color="undefined"
@@ -29,7 +28,7 @@
             </v-card-title>
             <v-card-text class="pb-1">
               <v-text-field
-                label="Emojis"
+                label="Emojis to rain during meeting"
                 v-model="emojisProxy"
                 hint="Each character is used as emoji"
                 :messages="!emojisProxy.length ? 'No emojis to rain' : []"

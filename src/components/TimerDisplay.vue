@@ -1,7 +1,7 @@
 <template>
   <div
-    class="font-weight-bold"
-    :class="{ pulsate: isPaused, 'text-h1': !xs, 'text-h2': xs }"
+    class="font-weight-bold text-h2 text-sm-h1"
+    :class="{ pulsate: isPaused }"
   >
     {{ formattedDuration }}
   </div>
@@ -31,12 +31,9 @@
 import { computed } from 'vue'
 import { useMeetingStore } from '@/stores/meeting-store'
 import { storeToRefs } from 'pinia'
-import { useDisplay } from 'vuetify'
 import { formatTimerDisplay, getTimerDisplayParts } from '@/helper/timer-helper'
 
 const { isPaused, elapsedSeconds } = storeToRefs(useMeetingStore())
-
-const { xs } = useDisplay()
 
 const formattedDuration = computed<string>(() => {
   const {
