@@ -11,6 +11,10 @@
           <v-expansion-panels v-model="expanded">
             <release-notes-item
               is-current
+              version="v0.3.2"
+              :new-features="['Removed external loading of Google Roboto font']"
+            />
+            <release-notes-item
               version="v0.3.1"
               :new-features="['Optimized UI for mobile devices']"
             />
