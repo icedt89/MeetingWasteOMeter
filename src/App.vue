@@ -14,8 +14,8 @@
             </svg>
           </v-icon>
         </app-icon-avatar>
-        Meeting Waste-o-Meter
-      </v-app-bar-title>
+        Meeting Waste-o-Meter</v-app-bar-title
+      >
       <template #append>
         <v-menu>
           <template #activator="{ props }">
@@ -24,6 +24,13 @@
 
           <template #default>
             <app-main-menu activatable>
+              <v-list-item :prepend-icon="mdiIncognito" title="Privacy overlay">
+                <privacy-overlay
+                  v-model="showPrivacyOverlay"
+                  activator="parent"
+                />
+              </v-list-item>
+              <v-divider />
               <v-list-item
                 :prepend-icon="mdiTimelapse"
                 title="Set elapsed time"
@@ -38,6 +45,7 @@
                 <reset-app-state-dialog activator="parent" />
 
                 <template #prepend>
+                  <!-- Reserve space for item without icon -->
                   <div style="width: 44px"></div>
                 </template>
               </v-list-item>
@@ -84,7 +92,7 @@
             <wasted-money />
           </v-col>
         </main-row>
-        <main-row>
+        <main-row class="ml-auto mr-auto" style="max-width: 700px">
           <v-col
             :cols="12"
             :class="{
@@ -106,12 +114,13 @@ import {
   mdiInformationOutline,
   mdiCog,
   mdiTimelapse,
+  mdiIncognito,
 } from '@mdi/js'
 import AboutDialog from '@/components/AboutDialog.vue'
 import TimerDisplay from '@/components/TimerDisplay.vue'
 import TimerControls from '@/components/TimerControls.vue'
 import { useEmojiRain } from '@/helper/emoji-rain'
-import { watch } from 'vue'
+import { ref, watch } from 'vue'
 import { useMeetingStore } from '@/stores/meeting-store'
 import { storeToRefs } from 'pinia'
 import ResourceEditor from '@/components/ResourceEditor.vue'
@@ -122,25 +131,44 @@ import { useSettingsStore } from '@/stores/settings-store'
 import SetElapsedTimeDialog from '@/components/SetElapsedTimeDialog.vue'
 import ResetAppStateDialog from '@/components/ResetAppStateDialog.vue'
 import { useDisplay } from 'vuetify'
+import { useWakeLock, watchImmediate } from '@vueuse/core'
+import PrivacyOverlay from './components/PrivacyOverlay.vue'
 
 const { xs } = useDisplay()
 
+const showPrivacyOverlay = ref(false)
+
 const { isIntervalActive, hasValidResources } = storeToRefs(useMeetingStore())
 
-const { isFunnyWastingAnimationEnabled, emojisArray } =
+const { isFunnyWastingAnimationEnabled, emojisArray, preventScreenTimeout } =
   storeToRefs(useSettingsStore())
 
 const { start: startEmojiRain, stop: stopEmojiRain } = useEmojiRain({
   emojis: emojisArray,
 })
 
-watch([isIntervalActive, isFunnyWastingAnimationEnabled], ([a, b]) => {
-  if (a && b) {
-    startEmojiRain()
+const { release: releaseWakeLock, request: requestWakeLock } = useWakeLock()
+
+watchImmediate([isIntervalActive, preventScreenTimeout], ([iia, pst]) => {
+  if (iia && pst) {
+    requestWakeLock('screen')
 
     return
   }
 
-  stopEmojiRain()
+  releaseWakeLock()
 })
+
+watch(
+  [isIntervalActive, isFunnyWastingAnimationEnabled, showPrivacyOverlay],
+  ([iia, ifwae, spo]) => {
+    if (iia && ifwae && !spo) {
+      startEmojiRain()
+
+      return
+    }
+
+    stopEmojiRain()
+  }
+)
 </script>

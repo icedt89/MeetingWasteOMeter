@@ -5,12 +5,20 @@
         <v-card-text class="pb-0">
           <div class="mb-3">
             Meeting Waste-o-Meter lets you compute the money that gets wasted
-            during a senseless meeting without any useful outcome.
+            during a senseless meeting without any useful outcome. It`s just for
+            fun 🤪.
           </div>
 
           <v-expansion-panels v-model="expanded">
             <release-notes-item
               is-current
+              version="v0.4.0"
+              :bugfixes="[
+                'Prevent device from turning off screen',
+                'Added privacy overlay',
+              ]"
+            />
+            <release-notes-item
               version="v0.3.3"
               :bugfixes="['Made App icon transparent']"
             />
@@ -50,6 +58,7 @@
           <div class="mt-3 text-center opacity-50">
             Made with <span class="heart-red">❤</span> by
             <a href="https://jan-hafner.de" target="_blank">Jan Hafner</a>
+            <small class="d-block opacity-20">v{{ appVersion }}</small>
           </div>
         </v-card-text>
         <v-card-actions>
@@ -63,6 +72,7 @@
 <script setup lang="ts">
 import ReleaseNotesItem from '@/components/ReleaseNotesItem.vue'
 import { ref } from 'vue'
+import { appVersion } from '../environment'
 
 const expanded = ref<number | null>(0)
 </script>

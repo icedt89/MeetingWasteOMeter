@@ -1,21 +1,17 @@
 <template>
-  <v-tooltip text="Rename meeting">
-    <template #activator="{ props }">
-      <v-btn
-        v-bind="props"
-        :icon="mdiPencil"
-        variant="text"
-        id="rename-meeting-dialog-activator"
-        :class="{
-          'opacity-50': isNameSet,
-        }"
-        size="x-small"
-        :color="isNameSet ? 'undefined' : 'error'"
-        density="comfortable"
-      />
-      <rename-meeting-dialog activator="#rename-meeting-dialog-activator" />
-    </template>
-  </v-tooltip>
+  <v-btn
+    v-tooltip="'Rename meeting'"
+    :icon="mdiPencil"
+    variant="text"
+    id="rename-meeting-dialog-activator"
+    :class="{
+      'opacity-50': isNameSet,
+    }"
+    size="x-small"
+    :color="isNameSet ? 'undefined' : 'error'"
+    density="comfortable"
+  />
+  <rename-meeting-dialog activator="#rename-meeting-dialog-activator" />
 </template>
 
 <script setup lang="ts">

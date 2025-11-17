@@ -61,17 +61,13 @@
             required
           >
             <template #append>
-              <v-tooltip text="Remove">
-                <template #activator="{ props }">
-                  <v-btn
-                    v-bind="props"
-                    variant="text"
-                    color="error"
-                    :icon="mdiDeleteForever"
-                    @click="$emit('resource-deletion-requested')"
-                  />
-                </template>
-              </v-tooltip>
+              <v-btn
+                v-tooltip="'Remove'"
+                variant="text"
+                color="error"
+                :icon="mdiDeleteForever"
+                @click="$emit('resource-deletion-requested')"
+              />
             </template>
           </v-number-input>
         </v-col>

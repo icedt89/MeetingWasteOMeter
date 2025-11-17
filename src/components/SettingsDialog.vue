@@ -10,7 +10,7 @@
           />
 
           <v-card>
-            <v-card-title class="pb-0">
+            <v-card-title class="pb-0 pt-0">
               <v-switch
                 label="Emoji rain"
                 v-model="isFunnyWastingAnimationEnabled"
@@ -31,10 +31,29 @@
                 label="Emojis to rain during meeting"
                 v-model="emojisProxy"
                 hint="Each character is used as emoji"
-                :messages="!emojisProxy.length ? 'No emojis to rain' : []"
+                :messages="
+                  !emojisProxy.length ? 'No emojis to rain' : undefined
+                "
               />
             </v-card-text>
           </v-card>
+
+          <v-switch
+            label="Prevent screen timeout"
+            v-model="preventScreenTimeout"
+            :disabled="!isWakeLockSupported"
+          >
+            <template #append>
+              <info-icon
+                class="ml-2"
+                :tooltip-text="
+                  isWakeLockSupported
+                    ? 'Your device supports this'
+                    : 'Your device does not support this'
+                "
+              />
+            </template>
+          </v-switch>
         </v-card-text>
         <v-card-actions>
           <close-dialog-button @click="isActive.value = false" />
@@ -49,10 +68,18 @@ import { useSettingsStore } from '@/stores/settings-store'
 import { storeToRefs } from 'pinia'
 import { computed } from 'vue'
 import { useEmojiRain } from '@/helper/emoji-rain'
-import { useTimeoutFn } from '@vueuse/core'
+import { useTimeoutFn, useWakeLock } from '@vueuse/core'
+import InfoIcon from '@/components/InfoIcon.vue'
 
-const { isFunnyWastingAnimationEnabled, currencySymbol, emojis, emojisArray } =
-  storeToRefs(useSettingsStore())
+const {
+  isFunnyWastingAnimationEnabled,
+  currencySymbol,
+  emojis,
+  emojisArray,
+  preventScreenTimeout,
+} = storeToRefs(useSettingsStore())
+
+const { isSupported: isWakeLockSupported } = useWakeLock()
 
 const emojisProxy = computed({
   get() {

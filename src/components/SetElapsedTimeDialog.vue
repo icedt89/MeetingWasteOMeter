@@ -43,7 +43,7 @@
 </template>
 
 <script setup lang="ts">
-import { formatTimerDisplay, getTimerDisplayParts } from '@/helper/timer-helper'
+import { getTimerDisplayParts } from '@/helper/timer-helper'
 import { useMeetingStore } from '@/stores/meeting-store'
 import { storeToRefs } from 'pinia'
 import { computed, ref, watch } from 'vue'
@@ -79,10 +79,6 @@ const elapsedSeconds = computed(() => {
 
   return minutesInSeconds + seconds.value
 })
-
-const formattedTimerDisplay = computed(() =>
-  formatTimerDisplay(hours.value || 0, minutes.value || 0, seconds.value || 0)
-)
 
 function setElapsedTime() {
   storedElapsedSeconds.value = elapsedSeconds.value
