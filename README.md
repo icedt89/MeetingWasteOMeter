@@ -4,6 +4,8 @@ Tired of wondering just how much that long meeting is _really_ costing? Say hell
 
 Meeting Waste-o-Meter is a sleek, intuitive, and lightning-fast app that brings a little fun to tracking meeting expenses.
 
+Visit [Meeting Waste-o-Meter](https://meetingwasteometer.jan-hafner.de) now!
+
 ## 🌟 Features You'll Love
 
 - **Real-time Cost Tracking:** See the costs climb with every passing second! 💰
