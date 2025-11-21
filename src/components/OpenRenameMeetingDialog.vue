@@ -8,7 +8,7 @@
       'opacity-50': isNameSet,
     }"
     size="x-small"
-    :color="isNameSet ? 'undefined' : 'error'"
+    :color="isNameSet ? 'on-background' : 'error'"
     density="comfortable"
   />
   <rename-meeting-dialog activator="#rename-meeting-dialog-activator" />

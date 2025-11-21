@@ -3,17 +3,22 @@
     <template #default="{ isActive }">
       <v-card title="About Meeting Waste-o-Meter">
         <v-card-text class="pb-0">
-          <div class="mb-3">
+          <div class="mb-4">
             Meeting Waste-o-Meter lets you compute the money that gets wasted
-            during a senseless meeting without any useful outcome. It`s just for
-            fun 🤪.
+            during a senseless meeting without any useful outcome.
+            <br />
+            It`s just for fun 🤪.
           </div>
 
           <v-expansion-panels v-model="expanded">
             <release-notes-item
               is-current
+              version="v0.4.3"
+              :new-features="['Added light theme']"
+            />
+            <release-notes-item
               version="v0.4.0"
-              :bugfixes="[
+              :new-features="[
                 'Prevent device from turning off screen',
                 'Added privacy overlay',
               ]"

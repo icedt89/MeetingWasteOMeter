@@ -13,7 +13,7 @@
       style="height: 100%"
     >
       <div>
-        <timer-display />
+        <timer-display class="text-white" />
       </div>
       <div>
         <timer-controls />
@@ -24,6 +24,7 @@
           text="Close"
           variant="tonal"
           color="white"
+          size="x-large"
           class="opacity-50"
         />
       </div>

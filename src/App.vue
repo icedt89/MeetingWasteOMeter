@@ -40,6 +40,7 @@
               <v-list-item :prepend-icon="mdiCog" title="Settings">
                 <settings-dialog activator="parent" />
               </v-list-item>
+              <switch-theme-list-item />
               <v-divider />
               <v-list-item title="Reset App">
                 <reset-app-state-dialog activator="parent" />
@@ -132,7 +133,8 @@ import SetElapsedTimeDialog from '@/components/SetElapsedTimeDialog.vue'
 import ResetAppStateDialog from '@/components/ResetAppStateDialog.vue'
 import { useDisplay } from 'vuetify'
 import { useWakeLock, watchImmediate } from '@vueuse/core'
-import PrivacyOverlay from './components/PrivacyOverlay.vue'
+import PrivacyOverlay from '@/components/PrivacyOverlay.vue'
+import SwitchThemeListItem from '@/components/SwitchThemeListItem.vue'
 
 const { xs } = useDisplay()
 
@@ -140,7 +142,7 @@ const showPrivacyOverlay = ref(false)
 
 const { isIntervalActive, hasValidResources } = storeToRefs(useMeetingStore())
 
-const { isFunnyWastingAnimationEnabled, emojisArray, preventScreenTimeout } =
+const { isEmojiRainEnabled, emojisArray, preventScreenTimeout } =
   storeToRefs(useSettingsStore())
 
 const { start: startEmojiRain, stop: stopEmojiRain } = useEmojiRain({
@@ -160,9 +162,9 @@ watchImmediate([isIntervalActive, preventScreenTimeout], ([iia, pst]) => {
 })
 
 watch(
-  [isIntervalActive, isFunnyWastingAnimationEnabled, showPrivacyOverlay],
-  ([iia, ifwae, spo]) => {
-    if (iia && ifwae && !spo) {
+  [isIntervalActive, isEmojiRainEnabled, showPrivacyOverlay],
+  ([iia, iere, spo]) => {
+    if (iia && iere && !spo) {
       startEmojiRain()
 
       return

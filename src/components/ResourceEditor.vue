@@ -17,7 +17,7 @@
   <v-btn
     block
     class="mt-2"
-    :color="resources.length ? 'undefined' : 'primary'"
+    :color="resources.length ? 'on-background' : 'primary'"
     size="large"
     :variant="resources.length ? 'tonal' : 'elevated'"
     text="Add resource"

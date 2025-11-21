@@ -1,4 +1,4 @@
-export const github = {
+export const softDark = {
   dark: true,
   colors: {
     background: '#212830',

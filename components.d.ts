@@ -23,6 +23,7 @@ declare module 'vue' {
     ResourceInput: typeof import('./src/components/ResourceInput.vue')['default']
     SetElapsedTimeDialog: typeof import('./src/components/SetElapsedTimeDialog.vue')['default']
     SettingsDialog: typeof import('./src/components/SettingsDialog.vue')['default']
+    SwitchThemeListItem: typeof import('./src/components/SwitchThemeListItem.vue')['default']
     TimerControls: typeof import('./src/components/TimerControls.vue')['default']
     TimerDisplay: typeof import('./src/components/TimerDisplay.vue')['default']
     WastedMoney: typeof import('./src/components/WastedMoney.vue')['default']

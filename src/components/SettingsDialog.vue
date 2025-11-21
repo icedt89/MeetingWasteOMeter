@@ -11,16 +11,13 @@
 
           <v-card>
             <v-card-title class="pb-0 pt-0">
-              <v-switch
-                label="Emoji rain"
-                v-model="isFunnyWastingAnimationEnabled"
-              >
+              <v-switch label="Emoji rain" v-model="isEmojiRainEnabled">
                 <template #append>
                   <v-btn
                     text="Test"
                     size="x-small"
                     variant="tonal"
-                    color="undefined"
+                    color="on-background"
                     @click="testEmojiRain()"
                   />
                 </template>
@@ -28,7 +25,7 @@
             </v-card-title>
             <v-card-text class="pb-1">
               <v-text-field
-                label="Emojis to rain during meeting"
+                label="Emojis to rain"
                 v-model="emojisProxy"
                 hint="Each character is used as emoji"
                 :messages="
@@ -72,7 +69,7 @@ import { useTimeoutFn, useWakeLock } from '@vueuse/core'
 import InfoIcon from '@/components/InfoIcon.vue'
 
 const {
-  isFunnyWastingAnimationEnabled,
+  isEmojiRainEnabled,
   currencySymbol,
   emojis,
   emojisArray,
