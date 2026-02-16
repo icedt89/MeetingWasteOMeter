@@ -1,5 +1,5 @@
 <template>
-  <v-dialog max-width="500">
+  <v-dialog max-width="500" :fullscreen="xs">
     <template #default="{ isActive }">
       <v-card title="Settings">
         <v-card-text class="pb-0">
@@ -67,6 +67,9 @@ import { computed } from 'vue'
 import { useEmojiRain } from '@/helper/emoji-rain'
 import { useTimeoutFn, useWakeLock } from '@vueuse/core'
 import InfoIcon from '@/components/InfoIcon.vue'
+import { useDisplay } from 'vuetify'
+
+const { xs } = useDisplay()
 
 const {
   isEmojiRainEnabled,

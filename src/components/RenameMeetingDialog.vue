@@ -1,5 +1,5 @@
 <template>
-  <v-dialog max-width="500">
+  <v-dialog max-width="500" :fullscreen="xs">
     <template #default="{ isActive }">
       <v-card title="Rename meeting">
         <v-card-text class="pb-0">
@@ -25,6 +25,9 @@
 import { isSet } from '@/helper/validators'
 import { useMeetingStore } from '@/stores/meeting-store'
 import { storeToRefs } from 'pinia'
+import { useDisplay } from 'vuetify'
+
+const { xs } = useDisplay()
 
 const { name } = storeToRefs(useMeetingStore())
 </script>

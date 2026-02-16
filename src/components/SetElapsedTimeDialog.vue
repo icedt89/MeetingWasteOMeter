@@ -1,5 +1,5 @@
 <template>
-  <v-dialog max-width="500">
+  <v-dialog max-width="500" :fullscreen="xs">
     <template #default="{ isActive }">
       <v-card title="Set elapsed time">
         <v-card-text>
@@ -47,6 +47,9 @@ import { getTimerDisplayParts } from '@/helper/timer-helper'
 import { useMeetingStore } from '@/stores/meeting-store'
 import { storeToRefs } from 'pinia'
 import { computed, ref, watch } from 'vue'
+import { useDisplay } from 'vuetify'
+
+const { xs } = useDisplay()
 
 const { elapsedSeconds: storedElapsedSeconds } = storeToRefs(useMeetingStore())
 
