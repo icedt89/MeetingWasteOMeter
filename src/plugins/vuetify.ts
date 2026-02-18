@@ -113,6 +113,11 @@ export default createVuetify({
         border: '1px solid rgb(var(--v-border-color), var(--v-border-opacity))',
       },
     },
+    VSwitch: {
+      color: 'primary',
+      hideDetails: true,
+      density: 'comfortable',
+    },
     VCheckbox: {
       color: 'primary',
       hideDetails: true,
