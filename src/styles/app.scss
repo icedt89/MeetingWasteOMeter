@@ -1,5 +1,19 @@
-@use './vuetify3-regression.scss';
+@use 'sass:map';
+@use 'vuetify/settings';
 
+// Vuetify
+@layer vuetify-core.reset {
+  ul {
+    padding: 0;
+    margin: 0;
+  }
+
+  h5 {
+    margin: 0;
+  }
+}
+
+// Other
 html {
   overflow-y: auto;
 }
@@ -30,4 +44,13 @@ a {
 
 .heart-red {
   color: #ff1744;
+}
+
+@media #{map.get(settings.$display-breakpoints, 'sm-and-up')} {
+  .text-sm-display-larger {
+    font-size: 6rem;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.015625em;
+  }
 }
