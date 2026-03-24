@@ -7,7 +7,7 @@
 // Styles
 import { aliases, mdi } from 'vuetify/iconsets/mdi-svg'
 import { md3 } from 'vuetify/blueprints'
-import 'vuetify/styles'
+import 'vuetify/styles/main.sass'
 
 // Composables
 import { createVuetify } from 'vuetify'
@@ -51,10 +51,9 @@ export default createVuetify({
       variant: 'text',
     },
     MainRow: {
-      dense: true,
+      density: 'compact',
       noGutters: true,
-      justify: 'center',
-      align: 'center',
+      class: 'justify-center align-center',
 
       VCol: {
         cols: 'auto',
@@ -93,7 +92,7 @@ export default createVuetify({
     },
     VRow: {
       noGutters: true,
-      dense: true,
+      density: 'compact',
     },
     VContainer: {
       fluid: true,

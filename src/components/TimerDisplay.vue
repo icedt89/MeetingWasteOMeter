@@ -1,6 +1,6 @@
 <template>
   <div
-    class="font-weight-bold text-h2 text-sm-h1"
+    class="font-weight-bold text-display-large text-sm-display-larger"
     :class="{ pulsate: isPaused }"
   >
     {{ formattedDuration }}

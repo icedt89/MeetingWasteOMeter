@@ -1,5 +1,5 @@
 <template>
-  <div class="text-h5 d-flex">
+  <div class="text-headline-small d-flex">
     {{ meetingName }}<open-rename-meeting-dialog />
   </div>
 </template>

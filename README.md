@@ -15,7 +15,7 @@ Visit [Meeting Waste-o-Meter](https://meetingwasteometer.jan-hafner.de) now!
 - **Customizable Settings:** Set your preferred currency symbol and fine-tune the experience. ⚙️
 - **Privacy Overlay:** Instantly hide sensitive information on the screen with a single click. 🔒
 - **Installable App:** As a Progressive Web App (PWA), you can install it on your desktop or mobile for a native-app feel. 💻📱
-- **Sleek & Modern UI:** Enjoy a beautiful, user-friendly interface built with Vuetify 3. 🎨
+- **Sleek & Modern UI:** Enjoy a beautiful, user-friendly interface built with Vuetify. 🎨
 
 ## 🚀 Why Choose Meeting Waste-o-Meter?
 
@@ -30,8 +30,8 @@ Using the Meeting Waste-o-Meter is a breeze. Just open the application, add your
 
 ## 🛠️ Tech Stack
 
-- **Vue.js 3:** For a reactive and efficient user interface.
-- **Vuetify 3:** A stunning Material Design component framework.
+- **Vue.js:** For a reactive and efficient user interface.
+- **Vuetify:** A stunning Material Design component framework.
 - **TypeScript:** For robust and scalable code.
 - **Vite:** For a blazing-fast development and build experience.
 - **Pinia:** For state management.
@@ -40,10 +40,6 @@ Using the Meeting Waste-o-Meter is a breeze. Just open the application, add your
 ## 🤝 Contributing
 
 Contributions are welcome! If you have an idea for a new feature, a cool enhancement, or a bug fix, please feel free to open an issue or submit a pull request.
-
-## 📝 License
-
-This project is licensed under the MIT License. See the `LICENSE` file for details.
 
 ---
 

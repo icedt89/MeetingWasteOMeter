@@ -89,7 +89,9 @@
         </main-row>
         <main-row v-if="hasValidResources">
           <v-col>
-            <div class="d-flex justify-center text-h5">Totally wasted</div>
+            <div class="d-flex justify-center text-headline-small">
+              Totally wasted
+            </div>
             <wasted-money />
           </v-col>
         </main-row>

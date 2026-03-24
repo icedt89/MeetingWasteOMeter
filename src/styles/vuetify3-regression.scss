@@ -1,0 +1,26 @@
+$body-font-family: 'Roboto', sans-serif;
+$heading-font-family: $body-font-family;
+
+@use 'vuetify/settings' with (
+  $typography: (
+    'display-larger': (
+      'size': 6rem,
+      'weight': 300,
+      'line-height': 1,
+      'letter-spacing': -0.015625em,
+      'font-family': $heading-font-family,
+      'text-transform': none,
+    ),
+  )
+);
+
+@layer vuetify-core.reset {
+  ul {
+    padding: 0;
+    margin: 0;
+  }
+
+  h5 {
+    margin: 0;
+  }
+}
