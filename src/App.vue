@@ -1,4 +1,10 @@
 <template>
+  <set-elapsed-time-dialog v-model="isSetElapsedTimeDialogOpen" />
+  <settings-dialog v-model="isSettingsDialogOpen" />
+  <reset-app-state-dialog v-model="isResetAppStateDialogOpen" />
+  <about-dialog v-model="isAboutDialogOpen" />
+  <privacy-overlay v-model="isPrivacyOverlayOpen" />
+
   <v-app>
     <v-app-bar>
       <v-app-bar-title>
@@ -24,36 +30,39 @@
 
           <template #default>
             <app-main-menu activatable>
-              <v-list-item :prepend-icon="mdiIncognito" title="Privacy overlay">
-                <privacy-overlay
-                  v-model="showPrivacyOverlay"
-                  activator="parent"
-                />
-              </v-list-item>
+              <v-list-item
+                :prepend-icon="mdiIncognito"
+                title="Privacy overlay"
+                @click="isPrivacyOverlayOpen = true"
+              />
               <v-divider />
               <v-list-item
                 :prepend-icon="mdiTimelapse"
                 title="Set elapsed time"
-              >
-                <set-elapsed-time-dialog activator="parent" />
-              </v-list-item>
-              <v-list-item :prepend-icon="mdiCog" title="Settings">
-                <settings-dialog activator="parent" />
-              </v-list-item>
+                @click="isSetElapsedTimeDialogOpen = true"
+              />
+              <v-list-item
+                :prepend-icon="mdiCog"
+                title="Settings"
+                @click="isSettingsDialogOpen = true"
+              />
               <switch-theme-list-item />
               <v-divider />
-              <v-list-item title="Reset App">
-                <reset-app-state-dialog activator="parent" />
-
+              <v-list-item
+                title="Reset App"
+                @click="isResetAppStateDialogOpen = true"
+              >
                 <template #prepend>
                   <!-- Reserve space for item without icon -->
                   <div style="width: 44px"></div>
                 </template>
               </v-list-item>
               <v-divider />
-              <v-list-item :prepend-icon="mdiInformationOutline" title="About">
-                <about-dialog activator="parent" />
-              </v-list-item>
+              <v-list-item
+                :prepend-icon="mdiInformationOutline"
+                title="About"
+                @click="isAboutDialogOpen = true"
+              />
             </app-main-menu>
           </template>
         </v-menu>
@@ -140,8 +149,6 @@ import SwitchThemeListItem from '@/components/SwitchThemeListItem.vue'
 
 const { xs } = useDisplay()
 
-const showPrivacyOverlay = ref(false)
-
 const { isIntervalActive, hasValidResources } = storeToRefs(useMeetingStore())
 
 const { isEmojiRainEnabled, emojisArray, preventScreenTimeout } =
@@ -152,6 +159,12 @@ const { start: startEmojiRain, stop: stopEmojiRain } = useEmojiRain({
 })
 
 const { release: releaseWakeLock, request: requestWakeLock } = useWakeLock()
+
+const isResetAppStateDialogOpen = ref(false)
+const isSettingsDialogOpen = ref(false)
+const isAboutDialogOpen = ref(false)
+const isSetElapsedTimeDialogOpen = ref(false)
+const isPrivacyOverlayOpen = ref(false)
 
 watchImmediate([isIntervalActive, preventScreenTimeout], ([iia, pst]) => {
   if (iia && pst) {
@@ -164,9 +177,9 @@ watchImmediate([isIntervalActive, preventScreenTimeout], ([iia, pst]) => {
 })
 
 watch(
-  [isIntervalActive, isEmojiRainEnabled, showPrivacyOverlay],
-  ([iia, iere, spo]) => {
-    if (iia && iere && !spo) {
+  [isIntervalActive, isEmojiRainEnabled, isPrivacyOverlayOpen],
+  ([iia, iere, ipoo]) => {
+    if (iia && iere && !ipoo) {
       startEmojiRain()
 
       return
