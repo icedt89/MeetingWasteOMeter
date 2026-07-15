@@ -1,5 +1,5 @@
 <template>
-  <timer-controls-button
+  <v-btn
     :active="isIntervalActive"
     :class="{
       'rounded-te-0 rounded-be-0': isResettable,
@@ -7,14 +7,20 @@
     rounded
     :text="actionText"
     :size="xs ? 'small' : undefined!"
+    stacked
+    density="compact"
+    color="primary"
     @click="toggleActivity()"
   />
-  <timer-controls-button
+  <v-btn
     v-if="isResettable"
     class="rounded-ts-0 rounded-bs-0"
     text="Reset"
     rounded
+    stacked
+    density="compact"
     :size="xs ? 'small' : undefined!"
+    color="primary"
     @click="resetElapsedSeconds()"
   />
 </template>

@@ -6,7 +6,7 @@
     :class="{
       'opacity-50': isNameSet,
     }"
-    size="x-small"
+    size="small"
     :color="isNameSet ? 'on-background' : 'error'"
     density="comfortable"
     id="rename-meeting-dialog-activator"

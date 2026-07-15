@@ -84,8 +84,10 @@ export default defineConfig(({ mode, command }) => {
     resolve: {
       alias,
     },
+    // This is necessary for portless to work
     server: {
-      port: 3002,
+      host: '127.0.0.1',
+      port: Number(process.env.PORT) || undefined,
     },
     build: {
       sourcemap: !isProductionBuild,

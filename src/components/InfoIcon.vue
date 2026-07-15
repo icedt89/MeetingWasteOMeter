@@ -1,13 +1,5 @@
 <template>
-  <v-icon
-    size="small"
-    :icon="mdiInformationOutline"
-    v-tooltip="{
-      text: tooltipText,
-      openOnClick: openTooltipOnClick,
-      persistent: false,
-    }"
-  />
+  <v-icon size="small" :icon="mdiInformationOutline" v-tooltip="tooltipText" />
 </template>
 
 <script setup lang="ts">

@@ -12,9 +12,9 @@
         ></span
       >
     </v-expansion-panel-title>
-    <v-expansion-panel-text class="wrapper-no-pb-bottom pb-1">
-      <v-row :no-gutters="false">
-        <v-col cols="12" sm="6">
+    <v-expansion-panel-text>
+      <v-row density="compact">
+        <v-col :cols="12" :sm="6">
           <v-text-field
             v-model="name"
             :rules="[
@@ -27,7 +27,7 @@
             required
           />
         </v-col>
-        <v-col cols="5" sm="2">
+        <v-col :cols="5" :sm="2">
           <v-number-input
             v-model="memberCount"
             :min="1"
@@ -43,7 +43,7 @@
             required
           />
         </v-col>
-        <v-col cols="7" sm="4">
+        <v-col :cols="7" :sm="4">
           <v-number-input
             v-model="costPerHour"
             :precision="2"

@@ -16,7 +16,7 @@
   >
   <v-btn
     block
-    class="mt-2"
+    class="mt-6"
     :color="resources.length ? 'on-background' : 'primary'"
     size="large"
     :variant="resources.length ? 'tonal' : 'elevated'"

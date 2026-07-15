@@ -14,7 +14,7 @@ declare module 'vue' {
     AboutDialog: typeof import('./src/components/AboutDialog.vue')['default']
     InfoIcon: typeof import('./src/components/InfoIcon.vue')['default']
     MeetingNameDisplay: typeof import('./src/components/MeetingNameDisplay.vue')['default']
-    OpenRenameMeetingDialog: typeof import('./src/components/OpenRenameMeetingDialog.vue')['default']
+    OpenRenameMeetingDialogBtn: typeof import('./src/components/OpenRenameMeetingDialogBtn.vue')['default']
     PrivacyOverlay: typeof import('./src/components/PrivacyOverlay.vue')['default']
     RenameMeetingDialog: typeof import('./src/components/RenameMeetingDialog.vue')['default']
     ResetAppStateDialog: typeof import('./src/components/ResetAppStateDialog.vue')['default']

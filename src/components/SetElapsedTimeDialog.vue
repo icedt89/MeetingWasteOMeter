@@ -1,10 +1,10 @@
 <template>
-  <v-dialog max-width="500" :fullscreen="xs">
+  <v-dialog :max-width="500" :fullscreen="xs" :capture-focus="false">
     <template #default="{ isActive }">
       <v-card title="Set elapsed time">
         <v-card-text>
-          <v-row :no-gutters="false">
-            <v-col cols="12" sm="4">
+          <v-row density="compact">
+            <v-col :cols="12" :sm="4">
               <v-number-input
                 v-model="hours"
                 hide-details
@@ -13,7 +13,7 @@
                 label="Hours"
               />
             </v-col>
-            <v-col cols="12" sm="4">
+            <v-col :cols="12" :sm="4">
               <v-number-input
                 v-model="minutes"
                 hide-details
@@ -22,7 +22,7 @@
                 label="Minutes"
               />
             </v-col>
-            <v-col cols="12" sm="4">
+            <v-col :cols="12" :sm="4">
               <v-number-input
                 v-model="seconds"
                 hide-details
@@ -34,8 +34,13 @@
           </v-row>
         </v-card-text>
         <v-card-actions>
-          <v-btn text="Set" variant="elevated" @click="setElapsedTime()" />
-          <close-dialog-button @click="isActive.value = false" />
+          <v-btn
+            text="Set"
+            variant="elevated"
+            color="primary"
+            @click="setElapsedTime()"
+          />
+          <v-btn @click="isActive.value = false" text="Close" />
         </v-card-actions>
       </v-card>
     </template>

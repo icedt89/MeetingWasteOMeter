@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="d-flex justify-center font-weight-bold mt-0 pt-0 text-display-large text-sm-display-larger"
-  >
+  <div class="font-weight-bold text-display-large text-sm-display-larger">
     {{ wastedMoneyFormatted }}{{ currencySymbol }}
   </div>
 </template>

@@ -1,15 +1,7 @@
 <template>
-  <v-overlay
-    v-model="show"
-    :close-on-back="false"
-    :close-on-content-click="false"
-    persistent
-    :opacity="1"
-    width="100%"
-    height="100%"
-  >
+  <v-overlay v-model="show" persistent :opacity="1" width="100%" height="100%">
     <div
-      class="w-100 d-flex justify-center align-center flex-column"
+      class="d-flex justify-center align-center flex-column"
       style="height: 100%"
     >
       <div>
@@ -33,8 +25,8 @@
 </template>
 
 <script setup lang="ts">
-import TimerControls from './TimerControls.vue'
-import TimerDisplay from './TimerDisplay.vue'
+import TimerControls from '@/components/TimerControls.vue'
+import TimerDisplay from '@/components/TimerDisplay.vue'
 
 const show = defineModel<boolean>({
   required: true,

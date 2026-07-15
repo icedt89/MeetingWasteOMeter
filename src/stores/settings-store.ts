@@ -1,7 +1,7 @@
 import { defaultEmojis } from '@/helper/emoji-rain'
-import { useWakeLock, watchImmediate } from '@vueuse/core'
+import { useWakeLock } from '@vueuse/core'
 import { defineStore } from 'pinia'
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useTheme } from 'vuetify'
 
 const defaultCurrencySymbol = ' €'
@@ -14,7 +14,7 @@ export const useSettingsStore = defineStore(
     const { change: changeTheme } = useTheme()
 
     const currentTheme = ref<KnownTheme>('softDark')
-    watchImmediate(currentTheme, changeTheme)
+    watch(currentTheme, (v) => changeTheme(v, false))
 
     const currencySymbol = ref(defaultCurrencySymbol)
 

@@ -1,8 +1,8 @@
 <template>
-  <v-dialog max-width="500" :fullscreen="xs">
+  <v-dialog :max-width="500" :fullscreen="xs" :capture-focus="false">
     <template #default="{ isActive }">
       <v-card title="Settings">
-        <v-card-text class="pb-0">
+        <v-card-text>
           <v-text-field
             label="Currency symbol"
             v-model="currencySymbol"
@@ -10,12 +10,12 @@
           />
 
           <v-card>
-            <v-card-title class="pb-0 pt-0">
+            <v-card-title>
               <v-switch label="Emoji rain" v-model="isEmojiRainEnabled">
                 <template #append>
                   <v-btn
                     text="Test"
-                    size="x-small"
+                    size="small"
                     variant="tonal"
                     color="on-background"
                     @click="testEmojiRain()"
@@ -23,7 +23,7 @@
                 </template>
               </v-switch>
             </v-card-title>
-            <v-card-text class="pb-1">
+            <v-card-text>
               <v-text-field
                 label="Emojis to rain"
                 v-model="emojisProxy"
@@ -42,7 +42,6 @@
           >
             <template #append>
               <info-icon
-                class="ml-2"
                 :tooltip-text="
                   isWakeLockSupported
                     ? 'Your device supports this'
@@ -53,7 +52,7 @@
           </v-switch>
         </v-card-text>
         <v-card-actions>
-          <close-dialog-button @click="isActive.value = false" />
+          <v-btn @click="isActive.value = false" text="Close" />
         </v-card-actions>
       </v-card>
     </template>
